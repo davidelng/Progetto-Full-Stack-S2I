@@ -1,28 +1,27 @@
 <div
-  class="p-3 border border-neutral-900/10 dark:border-neutral-800 rounded max-w-screen-sm my-3 mx-auto"
+  class="border border-neutral-900/10 dark:border-neutral-800 bg-white dark:bg-neutral-900 rounded max-w-screen-sm my-3 mx-auto"
 >
   <div *ngIf="editMode">
-    <form (ngSubmit)="submit()" [formGroup]="form">
+    <form (ngSubmit)="submit()" [formGroup]="form" class="p-3">
       <div *ngIf="invalid">
         <span class="text-red-400">Invalid</span>
       </div>
-      <div class="flex flex-col justify-center">
-        <label for="title">Title</label>
+      <div class="flex flex-col justify-center gap-3">
+        <label class="font-semibold text-lg" for="title"
+          >Modifica il tuo post</label
+        >
         <textarea
           maxlength="300"
-          placeholder="title"
           formControlName="title"
           rows="1"
           class="border rounded border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 p-1"
         ></textarea>
-        <label for="content">Content</label>
         <textarea
           name="content"
           id="content-form"
           cols="10"
           rows="5"
           formControlName="content"
-          placeholder="Enter your content"
           class="border rounded border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 p-1"
         ></textarea>
       </div>
@@ -32,7 +31,7 @@
           (click)="editMode = !editMode"
           title="Back"
           aria-label="Back"
-          class="ml-auto bg-neutral-100 dark:bg-neutral-800 rounded p-2 flex items-center gap-1"
+          class="ml-auto bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-emerald-500 rounded p-2 flex items-center gap-1"
         >
           <span class="material-symbols-outlined"> undo </span>
         </button>
@@ -47,18 +46,28 @@
     </form>
   </div>
   <div *ngIf="!editMode" class="flex flex-col">
-    <h3 class="text-xl my-2">{{ post.title }}</h3>
-    <p class="my-2">{{ post.content }}</p>
-    <div
-      class="flex items-center justify-between border-t border-neutral-900/10 dark:border-neutral-800 pt-3 my-2"
-    >
+    <div *ngIf="!isProfile()" class="px-3 py-2 font-bold">
       <small
-        ><span *ngIf="!isProfile()">{{ post.author_name }} - </span>
-        <span>{{
+        class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300"
+        ><span class="material-symbols-outlined w-4"> account_circle </span
+        >{{ post.author_name }}</small
+      >
+    </div>
+    <div class="p-3">
+      <h3 class="text-xl mb-5">{{ post.title }}</h3>
+      <p class="my-2 text-neutral-600 dark:text-neutral-300">
+        {{ post.content }}
+      </p>
+    </div>
+    <div
+      class="p-3 flex items-center justify-between border-t border-neutral-900/10 dark:border-neutral-800"
+    >
+      <small class="text-neutral-500">
+        {{
           post.updated_at !== post.created_at
             ? "Modified: " + post.created_at
             : "Created: " + post.updated_at
-        }}</span>
+        }}
       </small>
       <div
         *ngIf="isThisPostFromThisUser() && !editMode && !isHomepage()"
@@ -66,7 +75,7 @@
       >
         <button
           (click)="editPost()"
-          class="p-2 rounded bg-neutral-100 dark:bg-neutral-800 flex items-center gap-1"
+          class="p-2 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-emerald-500 flex items-center gap-1"
           title="Edit"
           aria-label="Edit"
         >
@@ -74,7 +83,7 @@
         </button>
         <button
           (click)="deletePost()"
-          class="p-2 rounded bg-neutral-100 dark:bg-neutral-800 flex items-center gap-1"
+          class="p-2 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-red-400 flex items-center gap-1"
           title="Delete"
           aria-label="Delete"
         >

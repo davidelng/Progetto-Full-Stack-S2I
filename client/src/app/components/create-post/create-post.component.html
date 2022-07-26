@@ -1,29 +1,28 @@
 <form
   (ngSubmit)="submit()"
   [formGroup]="form"
-  class="p-3 border border-neutral-900/10 dark:border-neutral-800 rounded max-w-screen-sm my-3 mx-auto"
+  class="p-3 border border-neutral-900/10 dark:border-neutral-800 bg-white dark:bg-neutral-900 rounded max-w-screen-sm my-3 mx-auto"
 >
   <div *ngIf="invalid">
     <span class="text-red-400">Invalid</span>
   </div>
-  <div class="flex flex-col justify-center">
+  <div class="flex flex-col justify-center gap-3">
     <input type="hidden" id="author" name="author" formControlName="author" />
-    <label for="title">Title</label>
+    <label class="font-semibold text-lg" for="title">Crea un nuovo post</label>
     <textarea
       maxlength="300"
-      placeholder="title"
+      placeholder="Un titolo interessante"
       formControlName="title"
       rows="1"
       class="border rounded border-neutral-900/10 dark:border-neutral-800 p-1 bg-neutral-50 dark:bg-neutral-800"
     ></textarea>
-    <label for="content">Content</label>
     <textarea
       name="content"
       id="content-form"
       cols="10"
       rows="5"
       formControlName="content"
-      placeholder="Enter your content"
+      placeholder="Il tuo post testuale"
       class="border rounded border-neutral-900/10 dark:border-neutral-800 p-1 bg-neutral-50 dark:bg-neutral-800"
     ></textarea>
   </div>

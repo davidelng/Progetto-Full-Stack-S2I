@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   user?: User;
   posts?: any;
 
-  postsCount: number = postMessage.length;
+  postsCount?: number;
 
   createPost: boolean = false;
 
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     .subscribe((user) => {
       this.user = user;
       this.resourceService.showUserPosts(this.user.id)
-      .subscribe((posts) => { this.posts = posts; }
+      .subscribe((posts) => { this.posts = posts; this.postsCount = this.posts.length; }
       );
     })
   }

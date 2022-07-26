@@ -1,9 +1,21 @@
 <div
-  class="static md:fixed h-full w-full top-0 left-0 p-5 md:py-20 md:px-5 border rounded md:border-r border-neutral-900/10 dark:border-neutral-800 flex flex-col gap-4 md:max-w-xs bg-neutral-50 dark:bg-neutral-800"
+  class="static md:fixed h-full w-full top-0 left-0 p-5 md:py-20 md:px-5 border rounded md:border-r border-neutral-900/10 dark:border-neutral-800 flex flex-col gap-4 md:max-w-xs bg-neutral-50 dark:bg-neutral-900"
 >
-  <h2>{{ user.name }}</h2>
-  <p>{{ user.email }}</p>
-  <small>Total posts: {{ postsCount }}</small>
+  <span
+    class="material-symbols-outlined text-neutral-300 dark:text-neutral-400 text-9xl mx-auto"
+  >
+    account_circle
+  </span>
+  <h2 class="flex items-center gap-1">
+    <span class="p-2 material-symbols-outlined"> face </span>{{ user.name }}
+  </h2>
+  <p class="flex items-center gap-1">
+    <span class="p-2 material-symbols-outlined"> mail </span>{{ user.email }}
+  </p>
+  <p class="flex items-center gap-1">
+    <span class="p-2 material-symbols-outlined"> tag </span>Total posts:
+    {{ postsCount }}
+  </p>
   <button
     *ngIf="!createPost"
     type="button"

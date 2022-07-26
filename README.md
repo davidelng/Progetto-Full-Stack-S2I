@@ -5,3 +5,5 @@ route guard
 event emitter
 redirects
 loadMore
+searchbar
+sticky nav
