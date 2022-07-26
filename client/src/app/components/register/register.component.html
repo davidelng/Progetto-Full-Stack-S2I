@@ -1,0 +1,77 @@
+<div class="border-t-4 m-auto max-w-md rounded shadow-md py-3 mt-10">
+  <form
+    (ngSubmit)="submit()"
+    [formGroup]="form"
+    class="flex flex-col gap-2 m-2 p-5"
+  >
+    <div>
+      <label for="name">Name<span class="text-red-400">*</span></label>
+      <div class="flex gap-1 items-center rounded mb-3 border">
+        <span class="p-2 material-symbols-outlined"> face </span>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          name="name"
+          placeholder="johndoe123"
+          class="w-full bg-transparent p-2"
+        />
+      </div>
+    </div>
+    <div>
+      <label for="email">Email<span class="text-red-400">*</span></label>
+      <div class="flex gap-1 items-center rounded mb-3 border">
+        <span class="p-2 material-symbols-outlined"> mail </span>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          class="w-full bg-transparent p-2"
+          placeholder="example@domain.com"
+        />
+      </div>
+    </div>
+    <div>
+      <label for="password">Password<span class="text-red-400">*</span></label>
+      <div class="flex gap-1 items-center rounded mb-3 border">
+        <span class="p-2 material-symbols-outlined"> lock </span>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          formControlName="password"
+          class="p-2 w-full bg-transparent"
+          placeholder="Str0ngp4S$w0rd"
+        />
+      </div>
+    </div>
+    <div>
+      <label for="password_confirmation"
+        >Confirm Password<span class="text-red-400">*</span></label
+      >
+      <div class="flex gap-1 items-center rounded mb-3 border">
+        <span class="p-2 material-symbols-outlined"> lock </span>
+        <input
+          type="password"
+          id="password_confirmation"
+          name="password_confirmation"
+          formControlName="password_confirmation"
+          class="p-2 w-full bg-transparent"
+          placeholder="Str0ngp4S$w0rd"
+        />
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="shadow uppercase tracking-wider rounded p-3 cursor-pointer"
+    >
+      Register
+    </button>
+  </form>
+  <p class="mx-auto mb-3 text-xs text-center">
+    Already a member?
+    <a class="text-red-400 underline" routerLink="/login">Login</a>
+    instead
+  </p>
+</div>

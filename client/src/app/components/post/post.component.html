@@ -1,0 +1,74 @@
+<div class="p-3 border rounded max-w-screen-sm my-3 mx-auto">
+  <div *ngIf="editMode">
+    <form (ngSubmit)="submit()" [formGroup]="form">
+      <div *ngIf="invalid">
+        <span class="text-red-400">Invalid</span>
+      </div>
+      <div class="flex flex-col justify-center">
+        <label for="title">Title</label>
+        <textarea
+          maxlength="300"
+          placeholder="title"
+          formControlName="title"
+          rows="1"
+          class="border rounded p-1 bg-transparent"
+        ></textarea>
+        <label for="content">Content</label>
+        <textarea
+          name="content"
+          id="content-form"
+          cols="10"
+          rows="5"
+          formControlName="content"
+          placeholder="Enter your content"
+          class="border rounded p-1 bg-transparent"
+        ></textarea>
+      </div>
+      <div class="flex items-center gap-1 my-2">
+        <button
+          type="button"
+          (click)="editMode = !editMode"
+          class="border rounded p-2 flex items-center gap-1"
+        >
+          <span class="material-symbols-outlined"> undo </span>Back
+        </button>
+        <button
+          type="submit"
+          class="border rounded p-2 flex items-center gap-1"
+        >
+          Submit
+          <span class="material-symbols-outlined"> send </span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!editMode" class="flex flex-col">
+    <h3 class="text-xl my-2">{{ post.title }}</h3>
+    <p class="my-2">{{ post.content }}</p>
+    <small class="border-t pt-3 my-2"
+      ><span *ngIf="!isProfile()">{{ post.author_name }} - </span>
+      <span>{{
+        post.updated_at !== post.created_at
+          ? "Modified: " + post.created_at
+          : "Created: " + post.updated_at
+      }}</span>
+    </small>
+  </div>
+  <div
+    *ngIf="isThisPostFromThisUser() && !editMode && !isHomepage()"
+    class="flex items-center gap-1"
+  >
+    <button
+      (click)="editPost()"
+      class="p-2 rounded border flex items-center gap-1"
+    >
+      <span class="material-symbols-outlined"> edit </span>Edit
+    </button>
+    <button
+      (click)="deletePost()"
+      class="p-2 rounded border flex items-center gap-1"
+    >
+      <span class="material-symbols-outlined"> delete </span>Delete
+    </button>
+  </div>
+</div>

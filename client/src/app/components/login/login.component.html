@@ -1,0 +1,47 @@
+<div class="border-t-4 m-auto max-w-md rounded shadow-md mt-10 py-3">
+  <form
+    (ngSubmit)="submit()"
+    [formGroup]="form"
+    class="flex flex-col gap-2 m-2 p-5"
+  >
+    <div class="flex items-center gap-1 rounded mb-5 border">
+      <label for="email" class="flex items-center gap-1 p-2" aria-label="email"
+        ><span class="material-symbols-outlined"> face </span></label
+      >
+      <input
+        type="email"
+        id="email"
+        name="email"
+        formControlName="email"
+        placeholder="Enter your password"
+        class="p-2 bg-transparent w-full"
+      />
+    </div>
+    <div class="flex items-center gap-1 rounded mb-5 border">
+      <label
+        for="password"
+        class="flex items-center gap-1 p-2"
+        aria-label="password"
+        ><span class="material-symbols-outlined"> lock </span></label
+      >
+      <input
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
+        placeholder="Enter your password"
+        class="bg-transparent p-2 w-full"
+      />
+    </div>
+    <button
+      type="submit"
+      class="shadow uppercase tracking-wider rounded p-3 cursor-pointer"
+    >
+      Login
+    </button>
+  </form>
+  <p class="mx-auto mb-3 text-xs text-center">
+    Don't have an account yet?
+    <a class="text-red-400 underline" routerLink="/register">Sign up</a>
+  </p>
+</div>
