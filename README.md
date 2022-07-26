@@ -1,8 +1,7 @@
 # Progetto finale Start2Impact
 
-invalid login/register/post
+invalid login/register/post (stesse email, username, password non corrette, ecc)
 route guard
 event emitter
-placeholders
 redirects
 loadMore

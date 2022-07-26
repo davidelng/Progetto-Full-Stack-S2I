@@ -1,4 +1,6 @@
-<div class="p-3 border rounded max-w-screen-sm my-3 mx-auto">
+<div
+  class="p-3 border border-neutral-900/10 dark:border-neutral-800 rounded max-w-screen-sm my-3 mx-auto"
+>
   <div *ngIf="editMode">
     <form (ngSubmit)="submit()" [formGroup]="form">
       <div *ngIf="invalid">
@@ -11,7 +13,7 @@
           placeholder="title"
           formControlName="title"
           rows="1"
-          class="border rounded p-1 bg-transparent"
+          class="border rounded border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 p-1"
         ></textarea>
         <label for="content">Content</label>
         <textarea
@@ -21,20 +23,22 @@
           rows="5"
           formControlName="content"
           placeholder="Enter your content"
-          class="border rounded p-1 bg-transparent"
+          class="border rounded border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 p-1"
         ></textarea>
       </div>
       <div class="flex items-center gap-1 my-2">
         <button
           type="button"
           (click)="editMode = !editMode"
-          class="border rounded p-2 flex items-center gap-1"
+          title="Back"
+          aria-label="Back"
+          class="ml-auto bg-neutral-100 dark:bg-neutral-800 rounded p-2 flex items-center gap-1"
         >
-          <span class="material-symbols-outlined"> undo </span>Back
+          <span class="material-symbols-outlined"> undo </span>
         </button>
         <button
           type="submit"
-          class="border rounded p-2 flex items-center gap-1"
+          class="bg-emerald-500 hover:bg-emerald-400 rounded p-2 flex items-center gap-1"
         >
           Submit
           <span class="material-symbols-outlined"> send </span>
@@ -45,30 +49,38 @@
   <div *ngIf="!editMode" class="flex flex-col">
     <h3 class="text-xl my-2">{{ post.title }}</h3>
     <p class="my-2">{{ post.content }}</p>
-    <small class="border-t pt-3 my-2"
-      ><span *ngIf="!isProfile()">{{ post.author_name }} - </span>
-      <span>{{
-        post.updated_at !== post.created_at
-          ? "Modified: " + post.created_at
-          : "Created: " + post.updated_at
-      }}</span>
-    </small>
-  </div>
-  <div
-    *ngIf="isThisPostFromThisUser() && !editMode && !isHomepage()"
-    class="flex items-center gap-1"
-  >
-    <button
-      (click)="editPost()"
-      class="p-2 rounded border flex items-center gap-1"
+    <div
+      class="flex items-center justify-between border-t border-neutral-900/10 dark:border-neutral-800 pt-3 my-2"
     >
-      <span class="material-symbols-outlined"> edit </span>Edit
-    </button>
-    <button
-      (click)="deletePost()"
-      class="p-2 rounded border flex items-center gap-1"
-    >
-      <span class="material-symbols-outlined"> delete </span>Delete
-    </button>
+      <small
+        ><span *ngIf="!isProfile()">{{ post.author_name }} - </span>
+        <span>{{
+          post.updated_at !== post.created_at
+            ? "Modified: " + post.created_at
+            : "Created: " + post.updated_at
+        }}</span>
+      </small>
+      <div
+        *ngIf="isThisPostFromThisUser() && !editMode && !isHomepage()"
+        class="flex items-center gap-1"
+      >
+        <button
+          (click)="editPost()"
+          class="p-2 rounded bg-neutral-100 dark:bg-neutral-800 flex items-center gap-1"
+          title="Edit"
+          aria-label="Edit"
+        >
+          <span class="material-symbols-outlined"> edit </span>
+        </button>
+        <button
+          (click)="deletePost()"
+          class="p-2 rounded bg-neutral-100 dark:bg-neutral-800 flex items-center gap-1"
+          title="Delete"
+          aria-label="Delete"
+        >
+          <span class="material-symbols-outlined"> delete </span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

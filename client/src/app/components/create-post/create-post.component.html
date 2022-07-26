@@ -1,7 +1,7 @@
 <form
   (ngSubmit)="submit()"
   [formGroup]="form"
-  class="p-3 border rounded max-w-screen-sm my-3 mx-auto"
+  class="p-3 border border-neutral-900/10 dark:border-neutral-800 rounded max-w-screen-sm my-3 mx-auto"
 >
   <div *ngIf="invalid">
     <span class="text-red-400">Invalid</span>
@@ -14,7 +14,7 @@
       placeholder="title"
       formControlName="title"
       rows="1"
-      class="border rounded p-1 bg-transparent"
+      class="border rounded border-neutral-900/10 dark:border-neutral-800 p-1 bg-neutral-50 dark:bg-neutral-800"
     ></textarea>
     <label for="content">Content</label>
     <textarea
@@ -24,10 +24,13 @@
       rows="5"
       formControlName="content"
       placeholder="Enter your content"
-      class="border rounded p-1 bg-transparent"
+      class="border rounded border-neutral-900/10 dark:border-neutral-800 p-1 bg-neutral-50 dark:bg-neutral-800"
     ></textarea>
   </div>
-  <button type="submit" class="border rounded p-2 my-2 flex items-center gap-1">
+  <button
+    type="submit"
+    class="bg-emerald-500 hover:bg-emerald-400 rounded p-2 my-2 flex items-center gap-1 ml-auto"
+  >
     Submit
     <span class="material-symbols-outlined"> send </span>
   </button>

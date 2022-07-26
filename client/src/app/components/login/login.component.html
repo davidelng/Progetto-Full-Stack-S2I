@@ -1,28 +1,38 @@
-<div class="border-t-4 m-auto max-w-md rounded shadow-md mt-10 py-3">
+<div
+  class="border-t-4 border-emerald-500 m-auto max-w-md rounded shadow-md mt-10 py-3"
+>
   <form
     (ngSubmit)="submit()"
     [formGroup]="form"
     class="flex flex-col gap-2 m-2 p-5"
   >
-    <div class="flex items-center gap-1 rounded mb-5 border">
+    <div
+      class="flex items-center gap-1 rounded mb-5 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
+    >
       <label for="email" class="flex items-center gap-1 p-2" aria-label="email"
-        ><span class="material-symbols-outlined"> face </span></label
+        ><span class="material-symbols-outlined text-neutral-400">
+          face
+        </span></label
       >
       <input
         type="email"
         id="email"
         name="email"
         formControlName="email"
-        placeholder="Enter your password"
+        placeholder="Enter your email"
         class="p-2 bg-transparent w-full"
       />
     </div>
-    <div class="flex items-center gap-1 rounded mb-5 border">
+    <div
+      class="flex items-center gap-1 rounded mb-5 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
+    >
       <label
         for="password"
         class="flex items-center gap-1 p-2"
         aria-label="password"
-        ><span class="material-symbols-outlined"> lock </span></label
+        ><span class="material-symbols-outlined text-neutral-400">
+          lock
+        </span></label
       >
       <input
         type="password"
@@ -35,13 +45,13 @@
     </div>
     <button
       type="submit"
-      class="shadow uppercase tracking-wider rounded p-3 cursor-pointer"
+      class="shadow uppercase tracking-wider rounded p-3 cursor-pointer bg-emerald-500 hover:bg-emerald-400"
     >
       Login
     </button>
   </form>
   <p class="mx-auto mb-3 text-xs text-center">
     Don't have an account yet?
-    <a class="text-red-400 underline" routerLink="/register">Sign up</a>
+    <a class="text-emerald-500 underline" routerLink="/register">Sign up</a>
   </p>
 </div>

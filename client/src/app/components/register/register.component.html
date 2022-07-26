@@ -1,13 +1,19 @@
-<div class="border-t-4 m-auto max-w-md rounded shadow-md py-3 mt-10">
+<div
+  class="border-t-4 border-emerald-500 m-auto max-w-md rounded shadow-md mt-10 py-3"
+>
   <form
     (ngSubmit)="submit()"
     [formGroup]="form"
     class="flex flex-col gap-2 m-2 p-5"
   >
     <div>
-      <label for="name">Name<span class="text-red-400">*</span></label>
-      <div class="flex gap-1 items-center rounded mb-3 border">
-        <span class="p-2 material-symbols-outlined"> face </span>
+      <label for="name">Name<span class="text-emerald-500">*</span></label>
+      <div
+        class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
+      >
+        <span class="p-2 material-symbols-outlined text-neutral-400">
+          face
+        </span>
         <input
           type="text"
           id="name"
@@ -19,9 +25,13 @@
       </div>
     </div>
     <div>
-      <label for="email">Email<span class="text-red-400">*</span></label>
-      <div class="flex gap-1 items-center rounded mb-3 border">
-        <span class="p-2 material-symbols-outlined"> mail </span>
+      <label for="email">Email<span class="text-emerald-500">*</span></label>
+      <div
+        class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
+      >
+        <span class="p-2 material-symbols-outlined text-neutral-400">
+          mail
+        </span>
         <input
           type="email"
           id="email"
@@ -33,9 +43,15 @@
       </div>
     </div>
     <div>
-      <label for="password">Password<span class="text-red-400">*</span></label>
-      <div class="flex gap-1 items-center rounded mb-3 border">
-        <span class="p-2 material-symbols-outlined"> lock </span>
+      <label for="password"
+        >Password<span class="text-emerald-500">*</span></label
+      >
+      <div
+        class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
+      >
+        <span class="p-2 material-symbols-outlined text-neutral-400">
+          lock
+        </span>
         <input
           type="password"
           id="password"
@@ -48,10 +64,14 @@
     </div>
     <div>
       <label for="password_confirmation"
-        >Confirm Password<span class="text-red-400">*</span></label
+        >Confirm Password<span class="text-emerald-500">*</span></label
       >
-      <div class="flex gap-1 items-center rounded mb-3 border">
-        <span class="p-2 material-symbols-outlined"> lock </span>
+      <div
+        class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
+      >
+        <span class="p-2 material-symbols-outlined text-neutral-400">
+          lock
+        </span>
         <input
           type="password"
           id="password_confirmation"
@@ -64,14 +84,14 @@
     </div>
     <button
       type="submit"
-      class="shadow uppercase tracking-wider rounded p-3 cursor-pointer"
+      class="shadow uppercase tracking-wider rounded p-3 cursor-pointer bg-emerald-500 hover:bg-emerald-400"
     >
       Register
     </button>
   </form>
   <p class="mx-auto mb-3 text-xs text-center">
     Already a member?
-    <a class="text-red-400 underline" routerLink="/login">Login</a>
+    <a class="text-emerald-400 underline" routerLink="/login">Login</a>
     instead
   </p>
 </div>
