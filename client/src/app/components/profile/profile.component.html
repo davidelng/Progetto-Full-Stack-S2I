@@ -1,8 +1,16 @@
 <ng-container *ngIf="user">
-  <app-sidebar [user]="user" [postsCount]="postsCount"></app-sidebar>
+  <app-sidebar
+    [user]="user"
+    [postsCount]="postsCount"
+    (showCreatePost)="createPost($event)"
+  ></app-sidebar>
 
   <div class="md:ml-80">
-    <app-create-post *ngIf="createPost" [userId]="user.id"></app-create-post>
+    <app-create-post
+      *ngIf="showCreatePost"
+      (submitted)="submitted($event)"
+      [userId]="user.id"
+    ></app-create-post>
     <div *ngIf="posts && posts.length > 0; else noPosts">
       <h2
         class="font-semibold text-xl my-5 mx-auto max-w-screen-sm flex items-center"

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -12,11 +12,15 @@ export class SidebarComponent implements OnInit {
 
   @Input() postsCount?: number;
 
-  createPost: boolean = false;
+  @Output() showCreatePost: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  createPost() {
+    this.showCreatePost.emit(true);
   }
 
 }

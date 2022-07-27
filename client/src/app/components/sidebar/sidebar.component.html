@@ -17,9 +17,8 @@
     {{ postsCount }}
   </p>
   <button
-    *ngIf="!createPost"
     type="button"
-    (click)="createPost = true"
+    (click)="createPost()"
     class="p-2 rounded bg-emerald-500 hover:bg-emerald-400 flex items-center justify-center gap-1"
   >
     New post

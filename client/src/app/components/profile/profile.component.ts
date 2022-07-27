@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
 
   postsCount?: number;
 
-  createPost: boolean = false;
+  showCreatePost: boolean = false;
 
   profileSubscription?: Subscription;
 
@@ -37,7 +37,12 @@ export class ProfileComponent implements OnInit {
   }
 
   submitted(event: boolean) {
+    this.showCreatePost = false;
     this.ngOnInit();
+  }
+
+  createPost(event: boolean) {
+    this.showCreatePost = true;
   }
 
   ngOnDestroy(): void {
