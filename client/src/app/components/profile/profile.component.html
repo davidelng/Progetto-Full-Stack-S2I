@@ -3,7 +3,7 @@
 
   <div class="md:ml-80">
     <app-create-post *ngIf="createPost" [userId]="user.id"></app-create-post>
-    <div *ngIf="posts">
+    <div *ngIf="posts && posts.length > 0; else noPosts">
       <h2
         class="font-semibold text-xl my-5 mx-auto max-w-screen-sm flex items-center"
       >
@@ -11,8 +11,20 @@
         >Questi sono tutti i tuoi post
       </h2>
       <div *ngFor="let post of posts">
-        <app-post [post]="post" [currentUserId]="user.id"></app-post>
+        <app-post
+          (submitted)="submitted($event)"
+          [post]="post"
+          [currentUserId]="user.id"
+        ></app-post>
       </div>
     </div>
+    <ng-template #noPosts>
+      <h2
+        class="font-semibold text-xl my-5 mx-auto max-w-screen-sm flex items-center"
+      >
+        <span class="p-2 material-symbols-outlined text-emerald-500"> tag </span
+        >Sembra che tu non abbia ancora detto nulla di interessante!
+      </h2>
+    </ng-template>
   </div>
 </ng-container>

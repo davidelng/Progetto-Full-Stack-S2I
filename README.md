@@ -6,4 +6,4 @@ event emitter
 redirects
 loadMore
 searchbar
-sticky nav
+user control

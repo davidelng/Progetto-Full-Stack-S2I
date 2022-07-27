@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResourceService } from 'src/app/services/resource.service';
-import { Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,6 +14,8 @@ export class CreatePostComponent implements OnInit {
   invalid: boolean = false;
 
   @Input() userId!: number;
+
+  @Output() submitted: EventEmitter<boolean> = new EventEmitter();
 
   postSubscription?: Subscription;
 
@@ -44,7 +45,7 @@ export class CreatePostComponent implements OnInit {
     this.invalid = false;
 
     this.postSubscription = this.resourceService.createPost(this.form.value)
-    .subscribe(() => window.location.reload());
+    .subscribe(() => { this.submitted.emit(true); this.form.reset(); });
   }
 
   ngOnDestroy() {

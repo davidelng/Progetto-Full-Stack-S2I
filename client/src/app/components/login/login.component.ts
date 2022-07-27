@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, Observable, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { ResourceService } from 'src/app/services/resource.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,11 @@ export class LoginComponent implements OnInit {
   form!:FormGroup;
   loginSubscription?: Subscription;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private router: Router, 
+    private userService: UserService
+    ) { }
 
   createForm() {
     this.form = this.formBuilder.group({
@@ -38,8 +43,10 @@ export class LoginComponent implements OnInit {
 
     this.loginSubscription = this.userService.getCSRFCookie().subscribe(() => {
       this.userService.logUser(this.form.value).subscribe(() => {
-        this.router.navigate(['/']); 
-        window.location.reload();
+        this.userService.getUser().subscribe(() => {
+          this.router.navigate(['/']); 
+          // window.location.reload();
+        })
         });
       })
   }

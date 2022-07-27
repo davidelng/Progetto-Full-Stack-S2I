@@ -1,6 +1,9 @@
-<ng-container *ngIf="user$ | async as user">
-  <app-create-post [userId]="user.id"></app-create-post>
-  <div *ngIf="posts$ | async as posts">
+<ng-container *ngIf="user">
+  <app-create-post
+    (submitted)="submitted($event)"
+    [userId]="user.id"
+  ></app-create-post>
+  <div *ngIf="posts && posts.length > 0; else noPosts">
     <h2
       class="font-semibold text-xl my-5 mx-auto max-w-screen-sm flex items-center"
     >
@@ -11,4 +14,12 @@
       <app-post [post]="post" [currentUserId]="user.id"></app-post>
     </div>
   </div>
+  <ng-template #noPosts>
+    <h2
+      class="font-semibold text-xl my-5 mx-auto max-w-screen-sm flex items-center"
+    >
+      <span class="p-2 material-symbols-outlined text-emerald-500"> tag </span
+      >C'è molto silenzio qui..
+    </h2>
+  </ng-template>
 </ng-container>

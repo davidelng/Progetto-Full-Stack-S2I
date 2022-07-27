@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ResourceService } from 'src/app/services/resource.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from 'src/app/models/post';
-import { Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,6 +15,8 @@ export class PostComponent implements OnInit {
 
   @Input() post!: Post;
   @Input() currentUserId!: number;
+
+  @Output() submitted: EventEmitter<boolean> = new EventEmitter();
 
   editMode: boolean = false;
   invalid: boolean = false;
@@ -57,8 +58,7 @@ export class PostComponent implements OnInit {
 
     this.updateSubscription = this.resourceService.updatePost(this.post.post_id, this.form.value)
     .subscribe(() => { 
-      this.editMode = false; 
-      this.ngOnInit(); 
+      this,this.submitted.emit(true);
     });
   }
 
@@ -69,7 +69,7 @@ export class PostComponent implements OnInit {
 
   deletePost() {
     this.deleteSubscription = this.resourceService.deletePost(this.post.post_id)
-    .subscribe(() => window.location.reload());
+    .subscribe(() => this.submitted.emit(true) );
   }
 
   isThisPostFromThisUser(): boolean {

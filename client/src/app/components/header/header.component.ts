@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 
@@ -10,24 +11,30 @@ import { User } from 'src/app/models/user';
 })
 export class HeaderComponent implements OnInit {
 
-  user$: Observable<User>
+  // user$: Observable<User>;
+  loginSubScription?: Subscription;
   logoutSubscription?: Subscription;
+
+  user?: User|null;
 
   darkMode: boolean = false;
 
   @ViewChild('mobileMenu') mobileMenu!: ElementRef;
 
-  constructor( private userService: UserService) { 
-    this.user$ = this.userService.getUser();
+  constructor( private userService: UserService, private router: Router) { 
+    // this.user$ = this.userService.getUser();
   }
 
   ngOnInit(): void {
     this.checkDarkMode();
+    this.loginSubScription = this.userService.user.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   logout(): void {
-    this.userService.logout().subscribe(() => {
-      window.location.reload();
+    this.loginSubScription = this.userService.logout().subscribe(() => {
+      this.router.navigate(['/login']);
     });
   }
 
@@ -55,6 +62,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    this.loginSubScription?.unsubscribe();
     this.logoutSubscription?.unsubscribe();
   }
 }

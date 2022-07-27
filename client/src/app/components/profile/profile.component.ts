@@ -12,8 +12,8 @@ import { Post } from 'src/app/models/post';
 })
 export class ProfileComponent implements OnInit {
 
-  user?: User;
-  posts?: any;
+  user?: User|null;
+  posts: Post[] = [];
 
   postsCount?: number;
 
@@ -24,13 +24,20 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService, private resourceService: ResourceService) { }
 
   ngOnInit(): void {
-    this.profileSubscription = this.userService.getUser()
+    this.profileSubscription = this.userService.user
     .subscribe((user) => {
       this.user = user;
-      this.resourceService.showUserPosts(this.user.id)
-      .subscribe((posts) => { this.posts = posts; this.postsCount = this.posts.length; }
-      );
+      this.resourceService.showUserPosts(this.user!.id).subscribe(() => {
+        this.resourceService.posts.subscribe((posts) => {
+          this.posts = posts;
+          this.postsCount = this.posts.length;
+        })
+      });
     })
+  }
+
+  submitted(event: boolean) {
+    this.ngOnInit();
   }
 
   ngOnDestroy(): void {
