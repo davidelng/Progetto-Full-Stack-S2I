@@ -38,6 +38,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  // filterSearch(value: string) {
+  //   console.log(value);
+  // }
+
   toggleMobileMenu(): void {
     this.mobileMenu.nativeElement.classList.toggle('custom-hidden');
   }

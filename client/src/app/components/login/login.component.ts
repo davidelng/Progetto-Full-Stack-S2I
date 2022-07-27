@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
       this.userService.logUser(this.form.value).subscribe(() => {
         this.userService.getUser().subscribe(() => {
           this.router.navigate(['/']); 
-          // window.location.reload();
         })
         });
       })

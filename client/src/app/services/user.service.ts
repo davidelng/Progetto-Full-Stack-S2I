@@ -11,6 +11,7 @@ import { ResourceService } from './resource.service';
 export class UserService {
 
   private userSource: BehaviorSubject<User|null> = new BehaviorSubject<User|null>(null);
+  
   user: Observable<User|null> = this.userSource.asObservable();
 
   baseUri: string = environment.apiUrl;
