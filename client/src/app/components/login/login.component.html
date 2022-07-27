@@ -1,6 +1,11 @@
 <div
   class="border-t-4 border-emerald-500 bg-white dark:bg-neutral-900 m-auto max-w-md rounded shadow-md mt-10 py-3"
 >
+  <span
+    class="material-symbols-outlined text-emerald-500 text-5xl text-center block p-2"
+  >
+    eco
+  </span>
   <div *ngIf="validation['error'] === true" class="text-red-400 m-2 px-5">
     {{ validation["message"] }}
   </div>
