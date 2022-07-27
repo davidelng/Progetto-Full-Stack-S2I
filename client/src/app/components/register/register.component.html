@@ -1,13 +1,25 @@
 <div
   class="border-t-4 border-emerald-500 bg-white dark:bg-neutral-900 m-auto max-w-md rounded shadow-md mt-10 py-3"
 >
+  <div *ngIf="validation['error'] === true" class="text-red-400 m-2 px-5">
+    {{ validation["message"] }}
+  </div>
   <form
     (ngSubmit)="submit()"
     [formGroup]="form"
     class="flex flex-col gap-2 m-2 p-5"
   >
     <div>
-      <label for="name">Name<span class="text-emerald-500">*</span></label>
+      <label for="name" class="flex items-center gap-1">
+        Name
+        <span class="text-emerald-500">*</span>
+        <div
+          *ngIf="f['name'].invalid && f['name'].value !== ''"
+          class="text-red-400"
+        >
+          Name is too short!
+        </div>
+      </label>
       <div
         class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
       >
@@ -25,7 +37,16 @@
       </div>
     </div>
     <div>
-      <label for="email">Email<span class="text-emerald-500">*</span></label>
+      <label for="email" class="flex items-center gap-1">
+        Email
+        <span class="text-emerald-500">*</span>
+        <div
+          *ngIf="f['email'].invalid && f['email'].value !== ''"
+          class="text-red-400"
+        >
+          Email is invalid!
+        </div>
+      </label>
       <div
         class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
       >
@@ -43,9 +64,16 @@
       </div>
     </div>
     <div>
-      <label for="password"
-        >Password<span class="text-emerald-500">*</span></label
-      >
+      <label for="password" class="flex items-center gap-1"
+        >Password
+        <span class="text-emerald-500">*</span>
+        <div
+          *ngIf="f['password'].invalid && f['password'].value !== ''"
+          class="text-red-400"
+        >
+          Password is too short!
+        </div>
+      </label>
       <div
         class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
       >
@@ -63,9 +91,18 @@
       </div>
     </div>
     <div>
-      <label for="password_confirmation"
-        >Confirm Password<span class="text-emerald-500">*</span></label
-      >
+      <label for="password_confirmation" class="flex items-center gap-1">
+        Confirm Password<span class="text-emerald-500">*</span>
+        <div
+          *ngIf="
+            f['password_confirmation'].invalid &&
+            f['password_confirmation'].value !== ''
+          "
+          class="text-red-400"
+        >
+          Password doesn't match
+        </div>
+      </label>
       <div
         class="flex gap-1 items-center rounded mb-3 border border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800"
       >

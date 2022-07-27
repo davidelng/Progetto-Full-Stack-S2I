@@ -23,8 +23,8 @@ export class CreatePostComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      content: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
+      title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
+      content: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(500)]],
       author: [this.userId, [Validators.required]],
       })
   }
@@ -45,7 +45,7 @@ export class CreatePostComponent implements OnInit {
     this.invalid = false;
 
     this.postSubscription = this.resourceService.createPost(this.form.value)
-    .subscribe(() => { this.submitted.emit(true); this.form.reset(); });
+    .subscribe(() => { this.submitted.emit(true); this.form.reset();  });
   }
 
   ngOnDestroy() {

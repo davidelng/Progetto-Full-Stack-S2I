@@ -35,8 +35,8 @@ export class PostComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
-      title: [this.post.title, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      content: [this.post.content, [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
+      title: [this.post.title, [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
+      content: [this.post.content, [Validators.required, Validators.minLength(4), Validators.maxLength(1000)]],
       })
   }
 

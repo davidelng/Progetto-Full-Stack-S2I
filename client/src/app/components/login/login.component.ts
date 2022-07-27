@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { ResourceService } from 'src/app/services/resource.service';
 
@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   form!:FormGroup;
   loginSubscription?: Subscription;
+
+  validation: {error: boolean, message: string} = {error: false, message: ''};
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -38,16 +40,23 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.form.invalid) {
+      this.validation = { error: true, message: 'Credentials invalid!'};
       return;
     }
 
-    this.loginSubscription = this.userService.getCSRFCookie().subscribe(() => {
-      this.userService.logUser(this.form.value).subscribe(() => {
-        this.userService.getUser().subscribe(() => {
-          this.router.navigate(['/']); 
+      this.loginSubscription = this.userService.getCSRFCookie().subscribe(() => {
+        this.userService.logUser(this.form.value).subscribe({
+          next: () => {
+          this.userService.getUser().subscribe(() => {
+            this.validation = { error: false, message: 'Login succesful!'};
+            this.router.navigate(['/']); 
+          })
+          },
+          error: () => { 
+            this.validation = { error: true, message: 'Wrong email or password!'};
+            return;
+        }});
         })
-        });
-      })
   }
 
   ngOnDestroy(): void {

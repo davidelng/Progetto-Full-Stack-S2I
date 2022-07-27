@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   form!:FormGroup;
   registerSubscription?: Subscription;
 
+  validation: {error: boolean, message: string} = {error: false, message: ''};
+
   constructor(
     private formBuilder: FormBuilder, 
     private userService: UserService, 
@@ -22,7 +24,7 @@ export class RegisterComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       password_confirmation: ['', Validators.required]
@@ -39,14 +41,24 @@ export class RegisterComponent implements OnInit {
 
   submit() {
     if (this.form.invalid) {
+      this.validation = { error: true, message: 'Invalid data!'};
+      return;
+    }
+
+    if (this.f['password'].value !== this.f['password_confirmation'].value) {
+      this.validation = {error: true, message: 'Passwords do not match!'};
       return;
     }
 
     this.registerSubscription = this.userService.getCSRFCookie().subscribe(() => {
-      this.userService.registerUser(this.form.value).subscribe(() => {
+      this.userService.registerUser(this.form.value).subscribe({
+        next: () => {
           this.router.navigate(['']); 
           window.location.reload();
-        });
+        },
+        error: () => {
+          this.validation = { error: true, message: 'Email is already taken!'};
+        }});
       })
   }
 
