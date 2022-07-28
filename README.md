@@ -23,9 +23,11 @@ Back End:
 - Laravel Fortify (Login, Registrazione)
 - MySQL
 
+![Screenshot](screenshot.png)
+
 ### Cosa ho costruito
 
-Ho creato un'applicazione ispirata a social media come Reddit e Twitter, dove un utente può registrarsi e scrivere post.
+Ho creato un'applicazione che prende spunto dal noto subreddit "Shower Thougts", dove un utente può registrarsi e scrivere brevi post di varia natura.
 
 Grazie alla struttura SPA è possibile visualizzare tutti i contenuti sulla homepage, filtrarli o crearne di nuovi, mentre nel proprio profilo è possibile modificare, cancellare e visualizzare i propri post, nonché visionare i propri dati personali. Ogni post mostra anche data di creazione o modifica, insieme ad autore e contenuto. Vengono limitate le chiamate asincrone sfruttando gli strumenti di Angular e RxJS come Reactive Forms, Behavior Subjects ed Event Emitter.
 
