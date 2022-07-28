@@ -2,6 +2,17 @@
   <app-header></app-header>
   <main class="grow my-10 p-5 relative">
     <router-outlet></router-outlet>
+    <button
+      class="flex items-center fixed right-5 bottom-5 z-20 p-3 rounded shadow bg-emerald-500 hover:bg-emerald-400"
+      type="button"
+      id="scrollToTop"
+      title="Scroll to top"
+      aria-label="Scroll to top"
+      [ngClass]="{ hiddenScroll: !windowScrolled }"
+      (click)="scrollToTop()"
+    >
+      <span class="material-symbols-outlined"> arrow_upward </span>
+    </button>
   </main>
   <app-footer></app-footer>
 </div>

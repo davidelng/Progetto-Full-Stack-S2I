@@ -1,5 +1,5 @@
 <header
-  class="z-10 fixed top-0 left-0 w-full md:flex justify-between gap-2 py-3 px-5 border-b bg-white dark:bg-neutral-900 border-neutral-900/10 dark:border-neutral-800"
+  class="z-10 fixed top-0 left-0 w-full md:flex justify-between gap-2 py-3 px-5 border-b backdrop-blur-sm bg-white/80 dark:bg-neutral-900/80 border-neutral-900/10 dark:border-neutral-800"
 >
   <div class="flex justify-between flex-1 gap-1">
     <a
@@ -8,15 +8,22 @@
       ><span class="material-symbols-outlined text-emerald-500"> eco </span
       >Mint</a
     >
-    <!-- <input
-      class="mx-4 p-1 max-w-3xl w-full border rounded bg-neutral-50 border-neutral-900/10 dark:border-neutral-800 dark:bg-neutral-800"
-      type="text"
-      name="search"
-      id="search"
-      placeholder="Filtra i post in base al loro titolo"
-      (keyup)="filterSearch(query.value)"
-      #query
-    /> -->
+    <!-- <div
+      class="flex items-center gap-1 mx-4 md:mx-12 max-w-6xl w-full border rounded bg-neutral-50 border-neutral-900/10 dark:border-neutral-800 dark:bg-neutral-800"
+    >
+      <span class="material-symbols-outlined text-neutral-400 p-1">
+        search
+      </span>
+      <input
+        class="bg-transparent w-full p-1"
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Filtra i post in base al loro titolo"
+        (keyup)="filterSearch(query.value)"
+        #query
+      />
+    </div> -->
     <button class="md:hidden" (click)="toggleMobileMenu()">
       <svg
         xmlns="http://www.w3.org/2000/svg"

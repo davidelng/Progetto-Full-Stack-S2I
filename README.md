@@ -27,7 +27,7 @@ Back End:
 
 Ho creato un'applicazione ispirata a social media come Reddit e Twitter, dove un utente può registrarsi e scrivere post.
 
-Grazie alla struttura SPA è possibile visualizzare tutti i contenuti sulla homepage o crearne di nuovi, mentre nel proprio profilo è possibile modificare, cancellare e visualizzare i propri post, nonché visionare i propri dati personali. Ogni post mostra anche data di creazione o modifica, insieme ad autore e contenuto. Vengono limitate le chiamate asincrone sfruttando gli strumenti di Angular e RxJS come Reactive Forms, Behavior Subjects ed Event Emitter.
+Grazie alla struttura SPA è possibile visualizzare tutti i contenuti sulla homepage, filtrarli o crearne di nuovi, mentre nel proprio profilo è possibile modificare, cancellare e visualizzare i propri post, nonché visionare i propri dati personali. Ogni post mostra anche data di creazione o modifica, insieme ad autore e contenuto. Vengono limitate le chiamate asincrone sfruttando gli strumenti di Angular e RxJS come Reactive Forms, Behavior Subjects ed Event Emitter.
 
 Non meno importante, TypeScript è stato implementato in modo approfondito per controllare ogni tipo di dato che sia in chiamata o risposta, in modo da non dover utilizzare variabili "any", con l'ausilio anche di tipi e interfacce custom. Inoltre, mentre i componenti si preoccupano di mostrare suddetti dati, tutta la logica di business è affidata ai servizi.
 
@@ -43,17 +43,10 @@ L'app è totalmente responsive e include anche uno switch per il tema chiaro/scu
 
 Nice to have:
 
-- Searchbar per filtrare i contenuti
 - Controllo del profilo utente (immagine, cambio mail, password e username)
 - Bottone "load more" per caricare altri contenuti
-- Bottone "to the top"
 - Sistema di like/dislike
 - Commenti
-
-Da rivedere:
-
-- Controllare tutte le subscribe per eventuali leak
-- Design
 
 ## Testare il progetto in locale
 

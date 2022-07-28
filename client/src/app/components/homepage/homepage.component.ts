@@ -17,6 +17,8 @@ export class HomepageComponent implements OnInit {
   // posts$: Observable<any>;
   posts: Post[] = [];
 
+  filteredPosts: Post[] = [];
+
   userSubscription?: Subscription;
   postsSubscription?: Subscription;
   resourceSubscription?: Subscription;
@@ -33,12 +35,23 @@ export class HomepageComponent implements OnInit {
     this.resourceSubscription = this.resourceService.showPosts().subscribe(() => {
       this.postsSubscription = this.resourceService.posts.subscribe((posts) => {
         this.posts = posts;
+        this.filteredPosts = posts;
       })
     });
   }
 
   submitted(event: boolean) {
     this.ngOnInit();
+  }
+
+  filterPosts(value: string) {
+    if (value === '') {
+      this.filteredPosts = this.posts;
+    } else {
+      let regex = new RegExp(value, 'gi');
+      console.log(regex);
+      this.filteredPosts = this.posts.filter((post) => { return post.title.match(regex)} );
+    }
   }
 
   ngOnDestroy(): void {
