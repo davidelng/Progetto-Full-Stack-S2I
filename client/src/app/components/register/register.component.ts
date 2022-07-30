@@ -50,7 +50,17 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.registerSubscription = this.userService.getCSRFCookie().subscribe(() => {
+    // this.registerSubscription = this.userService.getCSRFCookie().subscribe(() => {
+    //   this.userService.registerUser(this.form.value).subscribe({
+    //     next: () => {
+    //       this.router.navigate(['']); 
+    //       window.location.reload();
+    //     },
+    //     error: () => {
+    //       this.validation = { error: true, message: 'Email is already taken!'};
+    //     }});
+    //   })
+
       this.userService.registerUser(this.form.value).subscribe({
         next: () => {
           this.router.navigate(['']); 
@@ -59,7 +69,6 @@ export class RegisterComponent implements OnInit {
         error: () => {
           this.validation = { error: true, message: 'Email is already taken!'};
         }});
-      })
   }
 
   ngOnDestroy(): void {

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -15,8 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::select('posts.id as post_id', 'posts.created_at', 'posts.updated_at', 'name as author_name', 'author as author_id', 'title', 'content')
-            ->leftJoin('users', 'posts.author', '=', 'users.id')
+        $posts = Post::select('posts.id as post_id', 'posts.created_at', 'posts.updated_at', 'name as author_name', 'author_id', 'title', 'content')
+            ->leftJoin('users', 'posts.author_id', '=', 'users.id')
             ->orderBy('post_id', 'desc')
             ->get();
 
@@ -24,50 +23,42 @@ class PostController extends Controller
     }
 
     /**
-     * Display a listing of the resource for the specified user.
+     * Display a listing of the resource for a specific user
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function indexUser($user)
     {
-        // $posts = Post::where('author', '=', $user)->get();
-        $posts = Post::select('id as post_id', 'created_at', 'updated_at', 'author as author_id', 'title', 'content')
-            ->where('author', '=', $user)
+        $posts = Post::select('id as post_id', 'created_at', 'updated_at', 'author_id', 'title', 'content')
+            ->where('author_id', '=', $user)
             ->orderBy('post_id', 'desc')
             ->get();
 
         return $posts;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePostRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
+        $validated = $request->validate([
+            'author_id' => ['required'],
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+        ]);
 
         $post = new Post;
 
-        $post->author = $validated['author'];
+        $post->author_id = $validated['author_id'];
         $post->title = $validated['title'];
         $post->content = $validated['content'];
 
         $post->save();
-
-        // return $post;
     }
 
     /**
@@ -82,26 +73,18 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        return;
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
-        $validated = $request->validated();
+        $validated = $request->validate([
+            'title' => ['required', 'max:255'],
+            'content' => ['required'],
+        ]);
 
         $post->title = $validated['title'];
         $post->content = $validated['content'];

@@ -25,7 +25,7 @@ export class CreatePostComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
       content: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(500)]],
-      author: [this.userId, [Validators.required]],
+      author_id: [this.userId, [Validators.required]],
       })
   }
 

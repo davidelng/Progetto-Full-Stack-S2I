@@ -49,7 +49,6 @@ export class HomepageComponent implements OnInit {
       this.filteredPosts = this.posts;
     } else {
       let regex = new RegExp(value, 'gi');
-      console.log(regex);
       this.filteredPosts = this.posts.filter((post) => { return post.title.match(regex)} );
     }
   }

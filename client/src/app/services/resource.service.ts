@@ -9,6 +9,8 @@ import { Post } from '../models/post';
 })
 export class ResourceService {
 
+  private token: string|null = localStorage.getItem('token');
+
   private resourceSource: BehaviorSubject<any> = new BehaviorSubject(null);
   posts: Observable<any> = this.resourceSource.asObservable();
 
@@ -17,13 +19,13 @@ export class ResourceService {
   constructor(private http: HttpClient) { }
 
   showPosts() {
-    return this.http.get<Post[]>(this.baseUri, { withCredentials: true }).pipe(
+    return this.http.get<Post[]>(this.baseUri, {headers: {'Authorization': 'Bearer ' + this.token}}).pipe(
       map((res) => { this.resourceSource.next(res); })
     );
   }
 
   showUserPosts(userId: Subscription | number) {
-    return this.http.get<Post[]>(this.baseUri.concat(userId.toString()), { withCredentials: true }).pipe(
+    return this.http.get<Post[]>(this.baseUri.concat(userId.toString()), {headers: {'Authorization': 'Bearer ' + this.token}}).pipe(
       map((posts) => { 
         posts.filter((post) => { return userId === post.author_id }); 
         this.resourceSource.next(posts); 
@@ -32,15 +34,15 @@ export class ResourceService {
   }
 
   createPost(data: { title: string, content: string }) {
-    return this.http.post(this.baseUri, data, { withCredentials: true });
+    return this.http.post(this.baseUri, data, {headers: {'Authorization': 'Bearer ' + this.token}});
   }
 
   updatePost(postId: number, data: { title: string, content: string }) {
-    return this.http.put(this.baseUri.concat(postId.toString()), data, { withCredentials: true });
+    return this.http.put(this.baseUri.concat(postId.toString()), data, {headers: {'Authorization': 'Bearer ' + this.token}});
   }
 
   deletePost(postId: number) {
-    return this.http.delete(this.baseUri.concat(postId.toString()), { withCredentials: true });
+    return this.http.delete(this.baseUri.concat(postId.toString()), {headers: {'Authorization': 'Bearer ' + this.token}});
   }
 
   clearPosts() {

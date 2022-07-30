@@ -10,6 +10,8 @@ import { ResourceService } from './resource.service';
 })
 export class UserService {
 
+  private token: string|null = localStorage.getItem('token');
+
   private userSource: BehaviorSubject<User|null> = new BehaviorSubject<User|null>(null);
   
   user: Observable<User|null> = this.userSource.asObservable();
@@ -18,33 +20,37 @@ export class UserService {
 
   constructor(private http: HttpClient, private resourceService: ResourceService) { }
 
-  getCSRFCookie() {
-    return this.http.get(this.baseUri.concat('sanctum/csrf-cookie'), { withCredentials: true });
-  }
-
-  registerUser(credentials: {name: string, email: string, password: string, password_confirmation: string}) {
-    return this.http.post(this.baseUri.concat('register'), credentials, { withCredentials: true });
-  }
-
-  logUser(credentials: {name: string, email: string}) {
-    return this.http.post(this.baseUri.concat('login'), credentials, { withCredentials: true });
-  }
-
-  // getUser(): Observable<User> {
-  //   return this.http.get<User>(this.baseUri.concat('api/user'), { withCredentials: true }).pipe(
-  //       map((user: User) => { return user; })
-  //     );
+  // getCSRFCookie() {
+  //   return this.http.get(this.baseUri.concat('sanctum/csrf-cookie'), { withCredentials: true });
   // }
 
+  registerUser(credentials: {name: string, email: string, password: string, password_confirmation: string}) {
+    return this.http.post<{user: User, token: string}>(this.baseUri.concat('api/register'), credentials).pipe(
+      map((res) => { 
+        this.token = res.token; 
+        localStorage.setItem('token', res.token) 
+      })
+    );
+  }
+
+  logUser(credentials: {email: string, password: string}) {
+    return this.http.post<{user: User, token: string}>(this.baseUri.concat('api/login'), credentials).pipe(
+      map((res) => { 
+        this.token = res.token; 
+        localStorage.setItem('token', res.token) 
+      })
+    );
+  }
+
   getUser(): Observable<User|void> {
-    return this.http.get<User>(this.baseUri.concat('api/user'), { withCredentials: true }).pipe(
+    return this.http.get<User>(this.baseUri.concat('api/user'), {headers: {'Authorization': 'Bearer ' + this.token}} ).pipe(
         map((user: User) => { this.userSource.next(user); })
       );
   }
 
   logout() {
-    return this.http.post(this.baseUri.concat('logout'), null, { withCredentials: true }).pipe(
-      map(() => { this.userSource.next(null); this.resourceService.clearPosts(); })
+    return this.http.post(this.baseUri.concat('api/logout'), null, {headers: {'Authorization': 'Bearer ' + this.token}} ).pipe(
+      map(() => { this.userSource.next(null); this.resourceService.clearPosts(); this.token = null; localStorage.removeItem('token'); })
     );
   }
 

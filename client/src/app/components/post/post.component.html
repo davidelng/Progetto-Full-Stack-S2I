@@ -1,5 +1,5 @@
 <div
-  class="border border-neutral-900/10 dark:border-neutral-800 bg-white dark:bg-neutral-900 rounded max-w-screen-sm my-3 mx-auto"
+  class="border app-border bg-white dark:bg-neutral-900 rounded max-w-screen-sm my-3 mx-auto"
 >
   <div *ngIf="editMode">
     <form (ngSubmit)="submit()" [formGroup]="form" class="p-3">
@@ -14,7 +14,7 @@
           maxlength="300"
           formControlName="title"
           rows="1"
-          class="border rounded border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 p-1"
+          class="border rounded app-border bg-neutral-50 dark:bg-neutral-800 p-1"
         ></textarea>
         <textarea
           name="content"
@@ -22,7 +22,7 @@
           cols="10"
           rows="5"
           formControlName="content"
-          class="border rounded border-neutral-900/10 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800 p-1"
+          class="border rounded app-border bg-neutral-50 dark:bg-neutral-800 p-1"
         ></textarea>
       </div>
       <div class="flex items-center gap-1 my-2">
@@ -59,9 +59,7 @@
         {{ post.content }}
       </p>
     </div>
-    <div
-      class="p-3 flex items-center justify-between border-t border-neutral-900/10 dark:border-neutral-800"
-    >
+    <div class="p-3 flex items-center justify-between border-t app-border">
       <small class="text-neutral-500">
         {{
           post.updated_at !== post.created_at

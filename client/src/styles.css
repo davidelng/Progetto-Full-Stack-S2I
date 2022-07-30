@@ -24,3 +24,9 @@ html {
 #scrollToTop.hiddenScroll {
   transform: translateX(200%);
 }
+
+@layer components {
+  .app-border {
+    @apply border-neutral-900/10 dark:border-neutral-800;
+  }
+}

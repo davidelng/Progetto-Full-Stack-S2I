@@ -44,8 +44,21 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-      this.loginSubscription = this.userService.getCSRFCookie().subscribe(() => {
-        this.userService.logUser(this.form.value).subscribe({
+      // this.loginSubscription = this.userService.getCSRFCookie().subscribe(() => {
+      //   this.userService.logUser(this.form.value).subscribe({
+      //     next: () => {
+      //     this.userService.getUser().subscribe(() => {
+      //       this.validation = { error: false, message: 'Login succesful!'};
+      //       this.router.navigate(['/']); 
+      //     })
+      //     },
+      //     error: () => { 
+      //       this.validation = { error: true, message: 'Wrong email or password!'};
+      //       return;
+      //   }});
+      //   })
+
+      this.loginSubscription = this.userService.logUser(this.form.value).subscribe({
           next: () => {
           this.userService.getUser().subscribe(() => {
             this.validation = { error: false, message: 'Login succesful!'};
@@ -56,7 +69,7 @@ export class LoginComponent implements OnInit {
             this.validation = { error: true, message: 'Wrong email or password!'};
             return;
         }});
-        })
+        
   }
 
   ngOnDestroy(): void {
