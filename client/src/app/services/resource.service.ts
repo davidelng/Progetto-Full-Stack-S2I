@@ -9,7 +9,7 @@ import { Post } from '../models/post';
 })
 export class ResourceService {
 
-  private token: string|null = localStorage.getItem('token');
+  private token: string|null = null;
 
   private resourceSource: BehaviorSubject<any> = new BehaviorSubject(null);
   posts: Observable<any> = this.resourceSource.asObservable();
@@ -19,12 +19,14 @@ export class ResourceService {
   constructor(private http: HttpClient) { }
 
   showPosts() {
+    this.token = localStorage.getItem('token');
     return this.http.get<Post[]>(this.baseUri, {headers: {'Authorization': 'Bearer ' + this.token}}).pipe(
       map((res) => { this.resourceSource.next(res); })
     );
   }
 
   showUserPosts(userId: Subscription | number) {
+    this.token = localStorage.getItem('token');
     return this.http.get<Post[]>(this.baseUri.concat(userId.toString()), {headers: {'Authorization': 'Bearer ' + this.token}}).pipe(
       map((posts) => { 
         posts.filter((post) => { return userId === post.author_id }); 
