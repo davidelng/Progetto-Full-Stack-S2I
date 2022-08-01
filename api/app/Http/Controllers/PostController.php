@@ -19,7 +19,7 @@ class PostController extends Controller
             ->orderBy('post_id', 'desc')
             ->get();
 
-        return $posts;
+        return response($posts, 200);
     }
 
     /**
@@ -35,7 +35,7 @@ class PostController extends Controller
             ->orderBy('post_id', 'desc')
             ->get();
 
-        return $posts;
+        return response($posts, 200);
     }
 
     /**
@@ -59,6 +59,8 @@ class PostController extends Controller
         $post->content = $validated['content'];
 
         $post->save();
+
+        return response(['message' => 'Post saved'], 201);
     }
 
     /**
@@ -69,7 +71,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return $post;
+        return response($post, 200);
     }
 
     /**
@@ -90,6 +92,8 @@ class PostController extends Controller
         $post->content = $validated['content'];
 
         $post->update();
+
+        return response(['message' => 'Post updated'], 201);
     }
 
     /**
@@ -101,5 +105,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+
+        return response(['message' => 'Post deleted'], 200);
     }
 }

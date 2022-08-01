@@ -4,6 +4,7 @@ import { ResourceService } from 'src/app/services/resource.service';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { Post } from 'src/app/models/post';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-homepage',
@@ -12,21 +13,18 @@ import { Post } from 'src/app/models/post';
 })
 export class HomepageComponent implements OnInit {
 
-  // user$: Observable<User>;
   user?: User|null;
-  // posts$: Observable<any>;
   posts: Post[] = [];
-
+  currentPosts: Post[] = [];
   filteredPosts: Post[] = [];
 
   userSubscription?: Subscription;
   postsSubscription?: Subscription;
   resourceSubscription?: Subscription;
 
-  constructor(private userService: UserService, private resourceService: ResourceService) {
-    // this.user$ = this.userService.getUser();
-    // this.posts$ = this.resourceService.showPosts();
-   }
+  currentPostCount: number = 0;
+
+  constructor(private userService: UserService, private resourceService: ResourceService) {}
 
   ngOnInit(): void {
     this.userSubscription = this.userService.user.subscribe((user) => {
@@ -34,8 +32,11 @@ export class HomepageComponent implements OnInit {
     })
     this.resourceSubscription = this.resourceService.showPosts().subscribe(() => {
       this.postsSubscription = this.resourceService.posts.subscribe((posts) => {
+        this.currentPostCount = 0;
+        this.currentPosts = [];
         this.posts = posts;
-        this.filteredPosts = posts;
+        this.groupPosts();
+        this.filteredPosts = this.currentPosts;
       })
     });
   }
@@ -44,12 +45,23 @@ export class HomepageComponent implements OnInit {
     this.ngOnInit();
   }
 
+  groupPosts() {
+    for (let i = this.currentPostCount; i < (this.currentPostCount + 10); i++) {
+      if (this.posts[i]) {
+        this.currentPosts.push(this.posts[i]);
+      } else {
+        break;
+      }
+    }
+    this.currentPostCount = this.currentPostCount + 10;
+  }
+
   filterPosts(value: string) {
     if (value === '') {
-      this.filteredPosts = this.posts;
+      this.currentPosts = this.filteredPosts;
     } else {
       let regex = new RegExp(value, 'gi');
-      this.filteredPosts = this.posts.filter((post) => { return post.title.match(regex)} );
+      this.currentPosts = this.posts.filter((post) => { return post.title.match(regex)} );
     }
   }
 

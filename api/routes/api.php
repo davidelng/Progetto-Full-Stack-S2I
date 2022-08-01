@@ -30,5 +30,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('auth:sanctum')->get('post/{id}', [PostController::class, 'indexUser']);
-Route::middleware('auth:sanctum')->resource('post', PostController::class);
+Route::middleware('auth:sanctum')->get('/post/{id}', [PostController::class, 'indexUser']);
+Route::middleware('auth:sanctum')->resource('/post', PostController::class);

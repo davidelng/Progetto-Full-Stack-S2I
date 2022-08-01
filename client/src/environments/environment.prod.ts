@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '//localhost:8000/'
+  apiUrl: 'https://s2ifullstackapi.herokuapp.com/'
 };

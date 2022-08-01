@@ -45,7 +45,7 @@ export class CreatePostComponent implements OnInit {
     this.invalid = false;
 
     this.postSubscription = this.resourceService.createPost(this.form.value)
-    .subscribe(() => { this.submitted.emit(true); this.form.reset();  });
+    .subscribe(() => { this.submitted.emit(true); this.ngOnInit();  });
   }
 
   ngOnDestroy() {

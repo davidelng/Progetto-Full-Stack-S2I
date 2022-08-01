@@ -3,8 +3,8 @@
     (submitted)="submitted($event)"
     [userId]="user.id"
   ></app-create-post>
-  <div *ngIf="filteredPosts && posts.length > 0; else noPosts">
-    <div class="fixed top-0 left-0 mt-12 w-full py-2 px-4">
+  <div *ngIf="currentPosts && posts.length > 0; else noPosts">
+    <div class="fixed top-0 left-0 mt-12 w-full py-2 px-5">
       <div
         class="shadow-sm flex items-center gap-1 mx-auto max-w-2xl w-full border app-border rounded bg-neutral-50 dark:bg-neutral-900"
       >
@@ -28,9 +28,16 @@
       <span class="p-2 material-symbols-outlined text-emerald-500"> tag </span
       >Ecco gli ultimi post pubblicati
     </h2>
-    <div *ngFor="let post of filteredPosts">
+    <div *ngFor="let post of currentPosts">
       <app-post [post]="post" [currentUserId]="user.id"></app-post>
     </div>
+    <button
+      *ngIf="currentPosts.length > 9"
+      (click)="groupPosts()"
+      class="block my-6 mx-auto shadow rounded p-3 cursor-pointer bg-emerald-500 hover:bg-emerald-400"
+    >
+      Mostra di più
+    </button>
   </div>
   <ng-template #noPosts>
     <h2
