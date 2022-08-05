@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { ResourceService } from 'src/app/services/resource.service';
 
 @Component({
   selector: 'app-header',
@@ -21,8 +22,10 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('mobileMenu') mobileMenu!: ElementRef;
 
-  constructor( private userService: UserService, private router: Router) { 
-    // this.user$ = this.userService.getUser();
+  constructor( 
+    private userService: UserService, 
+    private router: Router, 
+    private resourceSerice: ResourceService) { 
   }
 
   ngOnInit(): void {
@@ -38,9 +41,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  // filterSearch(value: string) {
-  //   console.log(value);
-  // }
+  sendQueryString(value: string) {
+    this.resourceSerice.sendQueryString(value);
+  }
 
   toggleMobileMenu(): void {
     this.mobileMenu.nativeElement.classList.toggle('custom-hidden');
@@ -68,5 +71,12 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy(): void {
     this.loginSubScription?.unsubscribe();
     this.logoutSubscription?.unsubscribe();
+  }
+
+  isThisHomepage(): boolean {
+    if(this.router.url === '/') {
+      return true;
+    }
+    return false;
   }
 }

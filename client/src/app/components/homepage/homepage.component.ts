@@ -4,7 +4,6 @@ import { ResourceService } from 'src/app/services/resource.service';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { Post } from 'src/app/models/post';
-import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-homepage',
@@ -39,6 +38,7 @@ export class HomepageComponent implements OnInit {
         this.filteredPosts = this.currentPosts;
       })
     });
+    this.resourceService.queryString.subscribe((res) => this.filterPosts(res));
   }
 
   submitted(event: boolean) {

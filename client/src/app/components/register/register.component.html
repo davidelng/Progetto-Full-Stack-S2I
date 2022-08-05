@@ -6,7 +6,10 @@
   >
     eco
   </span>
-  <div *ngIf="validation['error'] === true" class="text-red-400 m-2 px-5">
+  <div
+    *ngIf="validation['error'] === true"
+    class="bg-red-400 my-2 mx-auto p-2 max-w-[18.5rem] text-center text-white rounded"
+  >
     {{ validation["message"] }}
   </div>
   <form

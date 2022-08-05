@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   form!:FormGroup;
   loginSubscription?: Subscription;
+  isUserLoggedIn: boolean = true;
 
   validation: {error: boolean, message: string} = {error: false, message: ''};
 
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.userService.userLogStatus.subscribe((res) => this.isUserLoggedIn = res);
   }
 
   get f() {

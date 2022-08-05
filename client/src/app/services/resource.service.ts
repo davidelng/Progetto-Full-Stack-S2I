@@ -14,6 +14,9 @@ export class ResourceService {
   private resourceSource: BehaviorSubject<any> = new BehaviorSubject(null);
   posts: Observable<any> = this.resourceSource.asObservable();
 
+  private queryStringSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  queryString: Observable<string> = this.queryStringSource.asObservable();
+
   baseUri: string = environment.apiUrl.concat('api/post');
 
   constructor(private http: HttpClient) { }
@@ -49,5 +52,9 @@ export class ResourceService {
 
   clearPosts() {
     this.resourceSource.next(null);
+  }
+
+  sendQueryString(query: string) {
+    this.queryStringSource.next(query);
   }
 }

@@ -8,8 +8,9 @@
       ><span class="material-symbols-outlined text-emerald-500"> eco </span
       >Mint</a
     >
-    <!-- <div
-      class="flex items-center gap-1 mx-4 md:mx-12 max-w-6xl w-full border rounded bg-neutral-50 border-neutral-900/10 dark:border-neutral-800 dark:bg-neutral-800"
+    <div
+      *ngIf="isThisHomepage()"
+      class="flex items-center gap-1 mx-4 md:mx-12 max-w-6xl w-full border rounded bg-neutral-100 border-neutral-900/10 dark:border-neutral-800 dark:bg-neutral-800"
     >
       <span class="material-symbols-outlined text-neutral-400 p-1">
         search
@@ -19,11 +20,11 @@
         type="text"
         name="search"
         id="search"
-        placeholder="Filtra i post in base al loro titolo"
-        (keyup)="filterSearch(query.value)"
+        placeholder="Filtra i post per titolo..."
+        (keyup)="sendQueryString(query.value)"
         #query
       />
-    </div> -->
+    </div>
     <button class="md:hidden" (click)="toggleMobileMenu()">
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -3,8 +3,11 @@
   [formGroup]="form"
   class="p-3 border app-border bg-white dark:bg-neutral-900 rounded max-w-screen-sm mb-3 mt-12 mx-auto"
 >
-  <div *ngIf="invalid">
-    <span class="text-red-400">Invalid</span>
+  <div
+    *ngIf="invalid"
+    class="bg-red-400 my-2 mx-auto p-2 max-w-[18.5rem] text-center text-white rounded"
+  >
+    Invalid
   </div>
   <div class="flex flex-col justify-center gap-3">
     <input
@@ -13,10 +16,16 @@
       name="author_id"
       formControlName="author_id"
     />
-    <label class="font-semibold text-lg" for="title">Crea un nuovo post</label>
+    <label class="font-semibold text-lg flex items-center" for="title"
+      ><span
+        class="px-2 py-1 md:p-2 material-symbols-outlined text-emerald-500"
+      >
+        tag </span
+      >Crea un nuovo post</label
+    >
     <textarea
       maxlength="300"
-      placeholder="Un titolo interessante"
+      placeholder="Un titolo interessante (min 4, max 100 caratteri)"
       formControlName="title"
       rows="1"
       class="border rounded app-border p-1 bg-neutral-50 dark:bg-neutral-800"
@@ -27,7 +36,7 @@
       cols="10"
       rows="5"
       formControlName="content"
-      placeholder="Il tuo post testuale"
+      placeholder="Il tuo post testuale (min 4 caratteri)"
       class="border rounded app-border p-1 bg-neutral-50 dark:bg-neutral-800"
     ></textarea>
   </div>

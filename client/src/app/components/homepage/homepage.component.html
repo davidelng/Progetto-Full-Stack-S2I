@@ -5,7 +5,7 @@
   ></app-create-post>
   <div *ngIf="currentPosts && posts.length > 0; else noPosts">
     <div class="fixed top-0 left-0 mt-12 w-full py-2 px-5">
-      <div
+      <!-- <div
         class="shadow-sm flex items-center gap-1 mx-auto max-w-2xl w-full border app-border rounded bg-neutral-50 dark:bg-neutral-900"
       >
         <span class="material-symbols-outlined text-neutral-400 p-2">
@@ -20,14 +20,21 @@
           (keyup)="filterPosts(query.value)"
           #query
         />
-      </div>
+      </div> -->
     </div>
-    <h2
-      class="font-semibold text-xl my-5 mx-auto max-w-screen-sm flex items-center"
+    <div
+      class="font-semibold text-xl my-5 mx-auto max-w-screen-sm flex md:items-center"
     >
-      <span class="p-2 material-symbols-outlined text-emerald-500"> tag </span
-      >Ecco gli ultimi post pubblicati
-    </h2>
+      <span class="px-2 py-1 md:p-2 material-symbols-outlined text-emerald-500">
+        tag
+      </span>
+      <h2>
+        Ciao
+        <span [routerLink]="'/profile'" class="text-emerald-500 cursor-pointer">
+          {{ user.name }}</span
+        >, ecco gli ultimi post pubblicati
+      </h2>
+    </div>
     <div *ngFor="let post of currentPosts">
       <app-post [post]="post" [currentUserId]="user.id"></app-post>
     </div>

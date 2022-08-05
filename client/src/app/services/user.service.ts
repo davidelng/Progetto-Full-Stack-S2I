@@ -16,6 +16,10 @@ export class UserService {
   
   user: Observable<User|null> = this.userSource.asObservable();
 
+  private userLogStatusSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  userLogStatus: Observable<boolean> = this.userLogStatusSource.asObservable();
+
   baseUri: string = environment.apiUrl;
 
   constructor(private http: HttpClient, private resourceService: ResourceService) { }
@@ -50,7 +54,13 @@ export class UserService {
 
   logout() {
     return this.http.post(this.baseUri.concat('api/logout'), null, {headers: {'Authorization': 'Bearer ' + this.token}} ).pipe(
-      map(() => { this.userSource.next(null); this.resourceService.clearPosts(); this.token = null; localStorage.removeItem('token'); })
+      map(() => { 
+        this.userSource.next(null); 
+        this.resourceService.clearPosts(); 
+        this.token = null; 
+        localStorage.removeItem('token');
+        this.userLogStatusSource.next(false);
+      })
     );
   }
 
