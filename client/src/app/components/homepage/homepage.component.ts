@@ -38,7 +38,7 @@ export class HomepageComponent implements OnInit {
         this.filteredPosts = this.currentPosts;
       })
     });
-    this.resourceService.queryString.subscribe((res) => this.filterPosts(res));
+    this.resourceService.queryString.subscribe((query: string) => this.filterPosts(query));
   }
 
   submitted(event: boolean) {
