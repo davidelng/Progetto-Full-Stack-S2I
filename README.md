@@ -23,7 +23,6 @@ Back End:
 
 - Laravel (API)
 - Laravel Sanctum (Autenticazione)
-- Laravel Fortify (Login, Registrazione)
 - PostgreSQL
 - Heroku (deploy)
 
